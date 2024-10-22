@@ -1,0 +1,2 @@
+#include "frmNuevoMedico.h"
+

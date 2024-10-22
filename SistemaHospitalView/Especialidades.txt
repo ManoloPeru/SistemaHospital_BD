@@ -1,0 +1,20 @@
+1;Cardiología;Estudio y tratamiento de enfermedades del corazón y del sistema circulatorio.
+13;Cirugía General;Tratamiento quirúrgico de diversas enfermedades que requieren intervención.
+2;Dermatología;Tratamiento de enfermedades de la piel, cabello y uñas.
+9;Endocrinología;Tratamiento de enfermedades relacionadas con las glándulas y las hormonas.
+3;Gastroenterología;Diagnóstico y tratamiento de trastornos del sistema digestivo.
+20;Geriatría;Tratamiento y cuidado médico de personas mayores y ancianos.
+10;Ginecología;Tratamiento de enfermedades del sistema reproductor femenino.
+19;Medicina de Urgencias;Tratamiento de emergencias médicas y situaciones críticas.
+17;Medicina Interna;Tratamiento de enfermedades generales que afectan los órganos internos.
+18;Nefrología;Estudio y tratamiento de enfermedades renales.
+5;Neumología;Diagnóstico y tratamiento de enfermedades respiratorias y pulmonares.
+4;Neurología;Estudio y tratamiento de enfermedades del sistema nervioso.
+6;Pediatría;Atención médica general para niños y adolescentes.
+11;Psiquiatría;Diagnóstico y tratamiento de trastornos mentales y emocionales.
+7;Oftalmología;Tratamiento de enfermedades de los ojos y la visión.
+8;Oncología;Tratamiento de diversos tipos de cáncer.
+14;Ortopedia;Tratamiento de lesiones y trastornos del sistema musculoesquelético.
+15;Otorrinolaringología;Tratamiento de enfermedades de los oídos, nariz y garganta.
+16;Reumatología;Diagnóstico y tratamiento de enfermedades reumáticas y autoinmunes.
+12;Urología;Tratamiento de enfermedades del tracto urinario y del sistema reproductor masculino.
