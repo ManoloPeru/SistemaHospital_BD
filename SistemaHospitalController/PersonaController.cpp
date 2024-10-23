@@ -1,4 +1,5 @@
 #include "PersonaController.h"
+#include <exception>
 
 using namespace SistemaHospitalController;
 
@@ -66,6 +67,47 @@ Persona^ PersonaController::buscarPersonaById(int idPersona) {
     return personaEncontrado;
 }
 
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+/*************************************************************************************************************/
+//Operaciones con Base de Datos
+int PersonaController::insertPersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento) {
+    int idPersonaGenerado = 0;
+    try
+    {
+        abrirConexion();
+        //Insertamos la persona empleando adicionalmente la consulta SQL con SCOPE_IDENTITY() para obtener el valor de la columna Identity
+        //idPersona, no se remite, por cuanto el valor lo asigna la base de datos
+        String^ sSql = "Insert into persona (apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipodocumento, numerodocumento)";
+        sSql += " values('" + apellidos + "', '" + nombres + "', " + fechaNacimiento + ", '" + genero + "', '" + direccion + "', '" + telefonos + "', '" + email + "', '" + estadoCivil + "', " + altura + ", '" + tipoDocumento + "', '" + numeroDocumento + "')";
+        sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idPersona generado
+        SqlCommand^ objCommand = gcnew SqlCommand();
+        objCommand->CommandText = sSql;
+        objCommand->Connection = this->getObjConexion();
+        // Ejecutar el comando y obtener el ID generado
+        idPersonaGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    finally {
+        cerrarConexion();
+    }
+    return idPersonaGenerado;
+}
+
 // Método que retorna la información de una persona por usuario y contraseña
 Persona^ PersonaController::buscarPersonaByUsuario(String^ usuario, String^ contrasenia) {
     Persona^ objPersona;
@@ -82,7 +124,7 @@ Persona^ PersonaController::buscarPersonaByUsuario(String^ usuario, String^ cont
     /*Para Select siempre sera ExecuteReader*/
     /*Para select siempre va a devolver un SqlDataReader*/
     SqlDataReader^ objData = objCommand->ExecuteReader();
-    while (objData->Read()) {
+    if (objData->Read()) {
         int idPersona = safe_cast<int>(objData[0]);
         String^ apellidos = safe_cast<String^>(objData[1]);
         String^ nombres = safe_cast<String^>(objData[2]);
@@ -102,37 +144,3 @@ Persona^ PersonaController::buscarPersonaByUsuario(String^ usuario, String^ cont
     cerrarConexion();
     return objPersona;
 }
-
-////Operaciones con Base de Datos
-//void PersonaController::insertPersona(int idPersona, String^ nombre, int fechaNacimiento, String^ genero, String^ direccion, String^ telefono, String^ email, String^ estadoCivil, float altura, int idPersona, String^ numeroColegioPersona, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
-//    abrirConexion();
-//    //Insertamos la persona empleando adicionalmente la consulta SQL con SCOPE_IDENTITY() para obtener el valor de la columna Identity
-//    //idPersona, no se remite, por cuanto el valor lo asigna la base de datos
-//    String^ sSql = "Insert into persona (nombre, fechaNacimiento, genero, direccion, telefono, email, estadoCivil, altura)";
-//    sSql += " values('" + nombre + "', " + fechaNacimiento + ", '" + genero + "', '" + direccion + "', '" + telefono + "', '" + email + "', '" + estadoCivil + "', " + altura + " )";
-//    sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idPersona generado
-//    SqlCommand^ objCommand = gcnew SqlCommand();
-//    objCommand->CommandText = sSql;
-//    objCommand->Connection = this->getObjConexion();
-//    // Ejecutar el comando y obtener el ID generado
-//    int idPersonaGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
-//
-//    //Insertamos la persona: idPersona no se remite, por cuanto el valor lo asigna la base de datos
-//    sSql = "Insert into persona (idPersona, numeroColegioPersona, certificaciones)";
-//    sSql += " values(" + idPersonaGenerado + ", '" + numeroColegioPersona + "', '" + certificaciones + "')";
-//    sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idPersona generado
-//    objCommand->CommandText = sSql;
-//    objCommand->Connection = this->getObjConexion();
-//    // Ejecutar el comando y obtener el ID generado
-//    int idPersonaGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
-//
-//    //Insertamos persona_especialidad: 
-//    for each (Especialidad ^ objEspecialidad in especialidades) {
-//        sSql = "Insert into persona_especialidad (idPersona, idEspecialidad)";
-//        sSql += " values(" + idPersonaGenerado + ", " + objEspecialidad->getIdEspecialidad() + ")";
-//        objCommand->CommandText = sSql;
-//        objCommand->Connection = this->getObjConexion();
-//        objCommand->ExecuteNonQuery();
-//    }
-//    cerrarConexion();
-//}

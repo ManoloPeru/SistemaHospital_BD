@@ -53,17 +53,24 @@ namespace SistemaHospitalView {
 	private: System::Windows::Forms::TextBox^ txtId;
 
 	private: System::Windows::Forms::Label^ label2;
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::Button^ btnCitasAsignadas;
+	private: System::Windows::Forms::Button^ btnPacientesAsociados;
+	private: System::Windows::Forms::Button^ btnLimpiar;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colId;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colNombre;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colMedico;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEdad;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colGenero;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colDirección;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colTelefono;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colEmail;
-
-	private: System::Windows::Forms::Button^ btnCitasAsignadas;
-	private: System::Windows::Forms::Button^ btnPacientesAsociados;
-	private: System::Windows::Forms::Button^ btnLimpiar;
 
 
 	protected:
@@ -89,18 +96,18 @@ namespace SistemaHospitalView {
 			this->cmbEspecialidad = (gcnew System::Windows::Forms::ComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dgvLista = (gcnew System::Windows::Forms::DataGridView());
-			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colEdad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colGenero = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colDirección = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colTelefono = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->btnNuevo = (gcnew System::Windows::Forms::Button());
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->btnCitasAsignadas = (gcnew System::Windows::Forms::Button());
 			this->btnPacientesAsociados = (gcnew System::Windows::Forms::Button());
+			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colMedico = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colEdad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colGenero = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colDirección = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colTelefono = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->colEmail = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->grpBoxBusq->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->BeginInit();
 			this->SuspendLayout();
@@ -194,7 +201,7 @@ namespace SistemaHospitalView {
 				static_cast<System::Int32>(static_cast<System::Byte>(192)));
 			this->dgvLista->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvLista->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
-				this->colId, this->colNombre,
+				this->colId, this->colMedico,
 					this->colEdad, this->colGenero, this->colDirección, this->colTelefono, this->colEmail
 			});
 			this->dgvLista->Location = System::Drawing::Point(12, 162);
@@ -204,55 +211,6 @@ namespace SistemaHospitalView {
 			this->dgvLista->Size = System::Drawing::Size(1491, 477);
 			this->dgvLista->TabIndex = 1;
 			this->dgvLista->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantMedicos::dataGridView1_CellContentClick);
-			// 
-			// colId
-			// 
-			this->colId->HeaderText = L"Id";
-			this->colId->MinimumWidth = 6;
-			this->colId->Name = L"colId";
-			this->colId->Width = 80;
-			// 
-			// colNombre
-			// 
-			this->colNombre->HeaderText = L"Nombre";
-			this->colNombre->MinimumWidth = 6;
-			this->colNombre->Name = L"colNombre";
-			this->colNombre->Width = 300;
-			// 
-			// colEdad
-			// 
-			this->colEdad->HeaderText = L"Edad";
-			this->colEdad->MinimumWidth = 6;
-			this->colEdad->Name = L"colEdad";
-			this->colEdad->Width = 80;
-			// 
-			// colGenero
-			// 
-			this->colGenero->HeaderText = L"Género";
-			this->colGenero->MinimumWidth = 6;
-			this->colGenero->Name = L"colGenero";
-			this->colGenero->Width = 125;
-			// 
-			// colDirección
-			// 
-			this->colDirección->HeaderText = L"Dirección";
-			this->colDirección->MinimumWidth = 6;
-			this->colDirección->Name = L"colDirección";
-			this->colDirección->Width = 500;
-			// 
-			// colTelefono
-			// 
-			this->colTelefono->HeaderText = L"Teléfono";
-			this->colTelefono->MinimumWidth = 6;
-			this->colTelefono->Name = L"colTelefono";
-			this->colTelefono->Width = 150;
-			// 
-			// colEmail
-			// 
-			this->colEmail->HeaderText = L"Email";
-			this->colEmail->MinimumWidth = 6;
-			this->colEmail->Name = L"colEmail";
-			this->colEmail->Width = 300;
 			// 
 			// btnNuevo
 			// 
@@ -312,6 +270,55 @@ namespace SistemaHospitalView {
 			this->btnPacientesAsociados->Text = L"Pacientes asociados";
 			this->btnPacientesAsociados->UseVisualStyleBackColor = false;
 			// 
+			// colId
+			// 
+			this->colId->HeaderText = L"Id";
+			this->colId->MinimumWidth = 6;
+			this->colId->Name = L"colId";
+			this->colId->Width = 80;
+			// 
+			// colMedico
+			// 
+			this->colMedico->HeaderText = L"Médico";
+			this->colMedico->MinimumWidth = 6;
+			this->colMedico->Name = L"colMedico";
+			this->colMedico->Width = 300;
+			// 
+			// colEdad
+			// 
+			this->colEdad->HeaderText = L"Fec. Nacimiento";
+			this->colEdad->MinimumWidth = 6;
+			this->colEdad->Name = L"colEdad";
+			this->colEdad->Width = 220;
+			// 
+			// colGenero
+			// 
+			this->colGenero->HeaderText = L"Género";
+			this->colGenero->MinimumWidth = 6;
+			this->colGenero->Name = L"colGenero";
+			this->colGenero->Width = 125;
+			// 
+			// colDirección
+			// 
+			this->colDirección->HeaderText = L"Dirección";
+			this->colDirección->MinimumWidth = 6;
+			this->colDirección->Name = L"colDirección";
+			this->colDirección->Width = 350;
+			// 
+			// colTelefono
+			// 
+			this->colTelefono->HeaderText = L"Teléfono";
+			this->colTelefono->MinimumWidth = 6;
+			this->colTelefono->Name = L"colTelefono";
+			this->colTelefono->Width = 150;
+			// 
+			// colEmail
+			// 
+			this->colEmail->HeaderText = L"Email";
+			this->colEmail->MinimumWidth = 6;
+			this->colEmail->Name = L"colEmail";
+			this->colEmail->Width = 300;
+			// 
 			// frmMantMedicos
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(14, 29);
@@ -347,7 +354,7 @@ namespace SistemaHospitalView {
 	private: System::Void frmMantMedicos_Load(System::Object^ sender, System::EventArgs^ e) {
 		// Aquí se ejecuta el método listarMedicos cuando se carga el formulario
 		MedicoController^ medicoController = gcnew MedicoController();
-		List<Medico^>^ listaMedicos = medicoController->listarMedicos();
+		List<Medico^>^ listaMedicos = medicoController->selectMedicos(); // listarMedicos();
 
 		mostrarGrilla(listaMedicos);
 	}
@@ -358,7 +365,7 @@ namespace SistemaHospitalView {
 		List<Medico^>^ listaMedicos;
 		MedicoController^ medicoController = gcnew MedicoController();
 		if (id->CompareTo("") == 0 && especialidad->CompareTo("--TODOS--") == 0) {
-			listaMedicos = medicoController->listarMedicos();
+			listaMedicos = medicoController->selectMedicos(); // listarMedicos();
 		}
 		else
 		{
@@ -415,12 +422,12 @@ namespace SistemaHospitalView {
 		int filaSeleccionada = this->dgvLista->SelectedRows[0]->Index; /*Le pongo [0] porque deseo el índice de la única fila que he seleccionado*/
 		int idEditar = Convert::ToInt32(this->dgvLista->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
 		MedicoController^ medicoController = gcnew MedicoController();
-		Medico^ objMedico = medicoController->buscarMedicoById(idEditar);
+		Medico^ objMedico = medicoController->getMedicoById(idEditar); // buscarMedicoById(idEditar);
 		
 		frmEditarMedico^ ventanaEditarMedico = gcnew frmEditarMedico(objMedico);
 		ventanaEditarMedico->ShowDialog();
 		this->dgvLista->Rows->Clear();
-		List<Medico^>^ listaMedicos = medicoController->listarMedicos();
+		List<Medico^>^ listaMedicos = medicoController->selectMedicos(); // listarMedicos();
 		mostrarGrilla(listaMedicos);
 	}
 		   /*METODOSPERSONALES*/
@@ -430,8 +437,9 @@ namespace SistemaHospitalView {
 			Medico^ medico = listaMedicos[i];
 			array<String^>^ filaGrilla = gcnew array<String^>(7);
 			filaGrilla[0] = Convert::ToString(medico->getIdMedico());
-			filaGrilla[1] = medico->getNombres();
-			filaGrilla[2] = Convert::ToString(medico->getFechaNacimiento());
+			filaGrilla[1] = medico->getApellidos() + " " + medico->getNombres();
+			String^ sFecha = Convert::ToString(medico->getFechaNacimiento()); //19900131
+			filaGrilla[2] = sFecha->Substring(6, 2) + "/" + sFecha->Substring(4, 2) + "/" + sFecha->Substring(0, 4);
 			filaGrilla[3] = medico->getGenero();
 			filaGrilla[4] = medico->getDireccion();
 			filaGrilla[5] = medico->getTelefonos();
@@ -443,7 +451,7 @@ namespace SistemaHospitalView {
 	private: System::Void btnLimpiar_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Aquí se ejecuta el método listarMedicos cuando se carga el formulario
 		MedicoController^ medicoController = gcnew MedicoController();
-		List<Medico^>^ listaMedicos = medicoController->listarMedicos();
+		List<Medico^>^ listaMedicos = medicoController->selectMedicos(); // listarMedicos();
 
 		mostrarGrilla(listaMedicos);
 	}

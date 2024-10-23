@@ -593,7 +593,8 @@ namespace SistemaHospitalView {
 		List<Paciente^>^ pacientesAsociados = gcnew List<Paciente^>();
 
 		MedicoController^ objMedico = gcnew MedicoController();
-		objMedico->modificarMedico(idPersona, nombre, edad, genero, direccion, telefono, email, estadoCivil, altura, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
+		//Procedimiento con archivo plano
+		//objMedico->modificarMedico(idPersona, nombre, edad, genero, direccion, telefono, email, estadoCivil, altura, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
 		MessageBox::Show("La información del Médico ha sido actualizado con éxito...!", "Actualización Exitosa",
 			MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();

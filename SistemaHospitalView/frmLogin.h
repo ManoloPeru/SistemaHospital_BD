@@ -103,6 +103,7 @@ namespace SistemaHospitalView {
 			this->txtContrasenia->PasswordChar = '*';
 			this->txtContrasenia->Size = System::Drawing::Size(262, 34);
 			this->txtContrasenia->TabIndex = 3;
+			this->txtContrasenia->Text = L"admin";
 			// 
 			// txtUsuario
 			// 
@@ -112,6 +113,7 @@ namespace SistemaHospitalView {
 			this->txtUsuario->Name = L"txtUsuario";
 			this->txtUsuario->Size = System::Drawing::Size(262, 34);
 			this->txtUsuario->TabIndex = 2;
+			this->txtUsuario->Text = L"admin";
 			// 
 			// label2
 			// 

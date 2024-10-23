@@ -41,3 +41,12 @@ namespace SistemaHospitalModel {
         void setPacientesAsociados(List<Paciente^>^ pacientesAsociados);
     };
 }
+/*
+CREATE TABLE medico (
+    idMedico INT IDENTITY(1,1) PRIMARY KEY,  -- Llave primaria y auto-incremental
+    idPersona INT NOT NULL,  -- Llave foránea que referencia a persona.idPersona
+    numeroColegioMedico VARCHAR(20) NULL,  -- Puede ser NULL
+    certificaciones text NULL,  -- Puede ser NULL, se almacenará como una lista de certificaciones en formato de texto
+    CONSTRAINT FK_Medico_Paciente FOREIGN KEY (idPersona) REFERENCES persona(idPersona)  -- Llave foránea que referencia a persona.idPersona
+);
+*/

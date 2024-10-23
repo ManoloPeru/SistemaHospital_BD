@@ -1,5 +1,6 @@
 #include "MedicoController.h"
 #include "EspecialidadController.h"
+#include "PersonaController.h"
 
 using namespace SistemaHospitalController;
 using namespace System::IO; //Para leer archivos
@@ -77,12 +78,13 @@ List<Medico^>^ MedicoController::listarMedicos() {
 }
 
 // Método para agregar médico
-void MedicoController::agregarMedico(int idPersona, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+void MedicoController::agregarMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
     List<Medico^>^ listaMedicos = listarMedicos();
     // Crear objeto Medico
     Medico^ medico = gcnew Medico();
     // Asignar propiedades de Persona
     medico->setIdPersona(idPersona);
+    medico->setApellidos(apellidos);
     medico->setNombres(nombres);
     medico->setFechaNacimiento(fechaNacimiento);
     medico->setGenero(genero);
@@ -91,6 +93,8 @@ void MedicoController::agregarMedico(int idPersona, String^ nombres, int fechaNa
     medico->setEmail(email);
     medico->setEstadoCivil(estadoCivil);
     medico->setAltura(altura);
+    medico->setTipoDocumento(tipoDocumento);
+    medico->setNumeroDocumento(numeroDocumento);
     // Asignar propiedades de Medico
     medico->setIdMedico(idMedico);
     medico->setNumeroColegioMedico(numeroColegioMedico);
@@ -146,18 +150,18 @@ void MedicoController::escribirArchivo(List<Medico^>^ listaMedicos) {
 }
 
 // Método para modificar médico
-void MedicoController::modificarMedico(int idPersona, String^ nombre, int fechaNacimiento, String^ genero, String^ direccion, String^ telefono, String^ email, String^ estadoCivil, float altura, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+void MedicoController::modificarMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
     List<Medico^>^ listaMedicos = listarMedicos();
     for (int i = 0; i < listaMedicos->Count; i++) {
         Medico^ medico = listaMedicos[i];
         if (medico->getIdMedico() == idMedico) {
             // Modificar datos del médico
             medico->setIdPersona(idPersona);
-            medico->setNombres(nombre);
+            medico->setNombres(nombres);
             medico->setFechaNacimiento(fechaNacimiento);
             medico->setGenero(genero);
             medico->setDireccion(direccion);
-            medico->setTelefonos(telefono);
+            medico->setTelefonos(telefonos);
             medico->setEmail(email);
             medico->setEstadoCivil(estadoCivil);
             medico->setAltura(altura);
@@ -234,36 +238,218 @@ Medico^ MedicoController::buscarMedicoById(int idMedico) {
     return medicoEncontrado;
 }
 
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
 //Operaciones con Base de Datos
-void MedicoController::insertMedico(int idPersona, String^ nombre, int fechaNacimiento, String^ genero, String^ direccion, String^ telefono, String^ email, String^ estadoCivil, float altura, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+List<Medico^>^ MedicoController::selectMedicos() {
+    List<Medico^>^ listaMedicos = gcnew List<Medico^>();
+    String^ separadores = ";";
+    String^ separadorLista = ",";
+
+    String^ sSql = "Select p.idPersona, p.apellidos, p.nombres, p.fechaNacimiento, p.genero, p.direccion, p.telefonos, p.email, p.estadoCivil, p.altura, p.tipoDocumento, p.numeroDocumento, ";
+    sSql += "m.idMedico, m.numeroColegioMedico, m.certificaciones ";
+    sSql += "From persona p, medico m ";
+    sSql += "Where p.idPersona = m.idPersona ";
+    sSql += "Order by p.apellidos, p.nombres ";
     abrirConexion();
-    //Insertamos la persona empleando adicionalmente la consulta SQL con SCOPE_IDENTITY() para obtener el valor de la columna Identity
-    //idPersona, no se remite, por cuanto el valor lo asigna la base de datos
-    String^ sSql = "Insert into persona (nombre, fechaNacimiento, genero, direccion, telefono, email, estadoCivil, altura)";
-    sSql += " values('" + nombre + "', " + fechaNacimiento + ", '" + genero + "', '" + direccion + "', '" + telefono + "', '" + email + "', '" + estadoCivil + "', " + altura + " )";
-    sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idPersona generado
+    /*objCommand viene a ser el objeto que utilizare para ejecutar el query o sentencia de la BD*/
     SqlCommand^ objCommand = gcnew SqlCommand();
+    /*Aqui voy a indicar la sentencia SQL que voy a ejecutar*/
     objCommand->CommandText = sSql;
+    /*Aqui estoy indicando que mi sentencia se va a ejecutar en mi conexion de BD*/
     objCommand->Connection = this->getObjConexion();
-    // Ejecutar el comando y obtener el ID generado
-    int idPersonaGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+    /*Aqui ejecuto la sentencia en la Base de Datos*/
+    /*Para Select siempre sera ExecuteReader*/
+    /*Para select siempre va a devolver un SqlDataReader*/
+    SqlDataReader^ objData = objCommand->ExecuteReader();
+    while (objData->Read()) {
+        //Persona
+        int idPersona = safe_cast<int>(objData[0]);
+        String^ apellidos = safe_cast<String^>(objData[1]);
+        String^ nombres = safe_cast<String^>(objData[2]);
+        int fechaNacimiento = safe_cast<int>(objData[3]);
+        String^ genero = safe_cast<String^>(objData[4]);
+        String^ direccion = safe_cast<String^>(objData[5]);
+        String^ telefonos = safe_cast<String^>(objData[6]);
+        String^ email = safe_cast<String^>(objData[7]);
+        String^ estadoCivil = safe_cast<String^>(objData[8]);
+        double altura = safe_cast<double>(objData[9]);
+        String^ tipoDocumento = safe_cast<String^>(objData[10]);
+        String^ numeroDocumento = safe_cast<String^>(objData[11]);
+        //Medico
+        int idMedico = safe_cast<int>(objData[12]);
+        String^ numeroColegioMedico = safe_cast<String^>(objData[13]);
 
-    //Insertamos la medico: idMedico no se remite, por cuanto el valor lo asigna la base de datos
-    sSql = "Insert into medico (idPersona, numeroColegioMedico, certificaciones)";
-    sSql += " values(" + idPersonaGenerado + ", '" + numeroColegioMedico + "', '" + certificaciones + "')";
-    sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idMedico generado
-    objCommand->CommandText = sSql;
-    objCommand->Connection = this->getObjConexion();
-    // Ejecutar el comando y obtener el ID generado
-    int idMedicoGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+        //Lista de Certificados
+        array<String^>^ listaCertificados = safe_cast<String^>(objData[14])->Split(separadorLista->ToCharArray());
+        List<String^>^ certificaciones = gcnew List<String^>();
+        for each (String ^ certificado in listaCertificados) {
+            certificaciones->Add(certificado);
+        }
 
-    //Insertamos medico_especialidad: 
-    for each(Especialidad^ objEspecialidad in especialidades) {
-        sSql = "Insert into medico_especialidad (idMedico, idEspecialidad)";
-        sSql += " values(" + idMedicoGenerado + ", " + objEspecialidad->getIdEspecialidad() + ")";
-        objCommand->CommandText = sSql;
-        objCommand->Connection = this->getObjConexion();
-        objCommand->ExecuteNonQuery();
+        List<Especialidad^>^ especialidades = gcnew List<Especialidad^>();
+        List<int>^ idCitasAsignadas = gcnew List<int>();
+        List<Paciente^>^ pacientesAsociados = gcnew List<Paciente^>();
+        //idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, , 
+        Medico^ objMedico = gcnew Medico(idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
+        // Asignar propiedades de Persona
+        objMedico->setIdPersona(idPersona);
+        objMedico->setApellidos(apellidos);
+        objMedico->setNombres(nombres);
+        objMedico->setFechaNacimiento(fechaNacimiento);
+        objMedico->setGenero(genero);
+        objMedico->setDireccion(direccion);
+        objMedico->setTelefonos(telefonos);
+        objMedico->setEmail(email);
+        objMedico->setEstadoCivil(estadoCivil);
+        objMedico->setAltura(altura);
+        objMedico->setTipoDocumento(tipoDocumento);
+        objMedico->setNumeroDocumento(numeroDocumento);
+        listaMedicos->Add(objMedico);
     }
     cerrarConexion();
+
+    return listaMedicos;
+}
+
+// Método que retorna la información de un medico por IdMedico
+Medico^ MedicoController::getMedicoById(int idMedico) {
+    Medico^ objMedico;
+    String^ separadores = ";";
+    String^ separadorLista = ",";
+
+    String^ sSql = "Select p.idPersona, p.apellidos, p.nombres, p.fechaNacimiento, p.genero, p.direccion, p.telefonos, p.email, p.estadoCivil, p.altura, p.tipoDocumento, p.numeroDocumento, ";
+    sSql += "m.idMedico, m.numeroColegioMedico, m.certificaciones ";
+    sSql += "From persona p, medico m ";
+    sSql += "Where p.idPersona = m.idPersona and m.idMedico = " + idMedico;
+    abrirConexion();
+    /*objCommand viene a ser el objeto que utilizare para ejecutar el query o sentencia de la BD*/
+    SqlCommand^ objCommand = gcnew SqlCommand();
+    /*Aqui voy a indicar la sentencia SQL que voy a ejecutar*/
+    objCommand->CommandText = sSql;
+    /*Aqui estoy indicando que mi sentencia se va a ejecutar en mi conexion de BD*/
+    objCommand->Connection = this->getObjConexion();
+    /*Aqui ejecuto la sentencia en la Base de Datos*/
+    /*Para Select siempre sera ExecuteReader*/
+    /*Para select siempre va a devolver un SqlDataReader*/
+    SqlDataReader^ objData = objCommand->ExecuteReader();
+    if (objData->Read()) {
+        //Persona
+        int idPersona = safe_cast<int>(objData[0]);
+        String^ apellidos = safe_cast<String^>(objData[1]);
+        String^ nombres = safe_cast<String^>(objData[2]);
+        int fechaNacimiento = safe_cast<int>(objData[3]);
+        String^ genero = safe_cast<String^>(objData[4]);
+        String^ direccion = safe_cast<String^>(objData[5]);
+        String^ telefonos = safe_cast<String^>(objData[6]);
+        String^ email = safe_cast<String^>(objData[7]);
+        String^ estadoCivil = safe_cast<String^>(objData[8]);
+        double altura = safe_cast<double>(objData[9]);
+        String^ tipoDocumento = safe_cast<String^>(objData[10]);
+        String^ numeroDocumento = safe_cast<String^>(objData[11]);
+        //Medico
+        int idMedico = safe_cast<int>(objData[12]);
+        String^ numeroColegioMedico = safe_cast<String^>(objData[13]);
+
+        //Lista de Certificados
+        array<String^>^ listaCertificados = safe_cast<String^>(objData[14])->Split(separadorLista->ToCharArray());
+        List<String^>^ certificaciones = gcnew List<String^>();
+        for each (String ^ certificado in listaCertificados) {
+            certificaciones->Add(certificado);
+        }
+
+        List<Especialidad^>^ especialidades = gcnew List<Especialidad^>();
+        List<int>^ idCitasAsignadas = gcnew List<int>();
+        List<Paciente^>^ pacientesAsociados = gcnew List<Paciente^>();
+        //idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, , 
+        objMedico = gcnew Medico(idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
+        // Asignar propiedades de Persona
+        objMedico->setIdPersona(idPersona);
+        objMedico->setApellidos(apellidos);
+        objMedico->setNombres(nombres);
+        objMedico->setFechaNacimiento(fechaNacimiento);
+        objMedico->setGenero(genero);
+        objMedico->setDireccion(direccion);
+        objMedico->setTelefonos(telefonos);
+        objMedico->setEmail(email);
+        objMedico->setEstadoCivil(estadoCivil);
+        objMedico->setAltura(altura);
+        objMedico->setTipoDocumento(tipoDocumento);
+        objMedico->setNumeroDocumento(numeroDocumento);
+    }
+    // Cerrar el DataReader después de usarlo
+    objData->Close();
+    List<Especialidad^>^ especialidades = gcnew List<Especialidad^>();
+    sSql = "Select idEspecialidad From medico_especialidad Where idMedico = " + idMedico;
+    objCommand->CommandText = sSql;
+    objData = objCommand->ExecuteReader();
+    while (objData->Read()) {
+        //Persona
+        int idEspecialidad = safe_cast<int>(objData[0]);
+        EspecialidadController^ objController = gcnew EspecialidadController();
+        Especialidad^ especialidad = objController->buscarEspecialidadById(idEspecialidad);
+        especialidades->Add(especialidad);
+    }
+    if (especialidades->Count > 0)
+    {
+        objMedico->setEspecialidades(especialidades);
+    }
+    cerrarConexion();
+    return objMedico;
+}
+
+int MedicoController::insertMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+    int idMedicoGenerado = 0;
+    try
+    {
+        PersonaController^ objControler = gcnew PersonaController();
+        idPersona = objControler->insertPersona(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento);
+        if (idPersona > 0)
+        {
+            abrirConexion();
+            // Serializar certificaciones
+            String^ listCertificados;
+            if (certificaciones->Count > 0) {
+                listCertificados = String::Join(",", certificaciones);
+            } 
+            //Insertamos la medico: idMedico no se remite, por cuanto el valor lo asigna la base de datos
+            String^ sSql = "Insert into medico (idPersona, numeroColegioMedico, certificaciones)";
+            sSql += " values(" + idPersona + ", '" + numeroColegioMedico + "', '" + listCertificados + "')";
+            sSql += "; SELECT SCOPE_IDENTITY();"; // Obtiene el valor del idMedico generado
+            SqlCommand^ objCommand = gcnew SqlCommand();
+            objCommand->CommandText = sSql;
+            objCommand->Connection = this->getObjConexion();
+            // Ejecutar el comando y obtener el ID generado
+            idMedicoGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+            //Insertamos medico_especialidad: 
+            for each(Especialidad^ objEspecialidad in especialidades) {
+                sSql = "Insert into medico_especialidad (idMedico, idEspecialidad)";
+                sSql += " values(" + idMedicoGenerado + ", " + objEspecialidad->getIdEspecialidad() + ")";
+                objCommand->CommandText = sSql;
+                objCommand->Connection = this->getObjConexion();
+                objCommand->ExecuteNonQuery();
+            }
+        }
+        
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    finally {
+        cerrarConexion();
+    }
+    return idMedicoGenerado;
 }
