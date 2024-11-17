@@ -28,4 +28,25 @@ namespace SistemaHospitalModel {
         void setNombre(String^ nombre);
         void setDisponibilidad(bool disponibilidad);
     };
+
+    public ref class ReporteEquipoMedico {
+    private:
+        String^ equipo;
+        int cantidad;
+
+    public:
+        // Constructor vacío
+        ReporteEquipoMedico();
+
+        // Constructor con parámetros
+        ReporteEquipoMedico(String^ equipo, int cantidad);
+
+        // Métodos GET
+        String^ getEquipo();
+        int getCantidad();
+
+        // Métodos SET
+        void setEquipo(String^ equipo);
+        void setCantidad(int cantidad);
+    };
 }

@@ -36,10 +36,10 @@
     <ClInclude Include="HistorialMedico.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="CitaMedica.h">
+    <ClInclude Include="Medico.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Medico.h">
+    <ClInclude Include="Cita.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,10 +65,10 @@
     <ClCompile Include="HistorialMedico.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="CitaMedica.cpp">
+    <ClCompile Include="Medico.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Medico.cpp">
+    <ClCompile Include="Cita.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

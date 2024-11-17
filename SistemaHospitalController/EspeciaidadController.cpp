@@ -2,6 +2,7 @@
 
 using namespace SistemaHospitalController;
 using namespace System::IO; //Para leer archivos
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 EspecialidadController::EspecialidadController() {
 
@@ -62,4 +63,94 @@ Especialidad^ EspecialidadController::buscarEspecialidadByNombre(String^ sNombre
         }
     }
     return especialidadEncontrado;
+}
+
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+/****************************************************************************************************************************/
+// Método para listar especialidades desde un archivo binario
+List<Especialidad^>^ EspecialidadController::listarEspecialidadesBin(String^ pathArchivo) {
+    Stream^ stream = File::Open(pathArchivo, FileMode::Open);
+    BinaryFormatter^ formateador = gcnew BinaryFormatter();
+    List<Especialidad^>^ listaEspecialidades = dynamic_cast<List<Especialidad^>^>(formateador->Deserialize(stream));
+    stream->Close();
+    return listaEspecialidades;
+}
+
+// Método para escribir especialidades en archivo
+void EspecialidadController::escribirArchivoBin(List<Especialidad^>^ listaEspecialidades, String^ pathArchivo) {
+    //Creamos el archivo
+    Stream^ stream = File::Open(pathArchivo, FileMode::Create);
+    BinaryFormatter^ formateador = gcnew BinaryFormatter();
+    formateador->Serialize(stream, listaEspecialidades);
+    stream->Close();
+}
+
+// Método para agregar Especialidad
+void EspecialidadController::agregarEspecialidad(int idEspecialidad, String^ nombre, String^ descripcion, String^ pathArchivo) {
+    List<Especialidad^>^ listaEspecialidades = listarEspecialidadesBin(pathArchivo);
+    // Crear objeto Especialidad
+    Especialidad^ especialidad = gcnew Especialidad();
+    // Asignar propiedades de Especialidad
+    especialidad->setIdEspecialidad(idEspecialidad);
+    especialidad->setNombre(nombre);
+    especialidad->setDescripcion(descripcion);
+
+    listaEspecialidades->Add(especialidad);
+    escribirArchivoBin(listaEspecialidades, pathArchivo);
+}
+
+void EspecialidadController::modificarEspecialidad(int idEspecialidad, String^ nombre, String^ descripcion, String^ pathArchivo) {
+    List<Especialidad^>^ listaEspecialidades = listarEspecialidadesBin(pathArchivo);
+    for (int i = 0; i < listaEspecialidades->Count; i++) {
+        Especialidad^ especialidad = listaEspecialidades[i];
+        if (especialidad->getIdEspecialidad() == idEspecialidad) {
+            // Modificar datos del médico
+            especialidad->setIdEspecialidad(idEspecialidad);
+            especialidad->setNombre(nombre);
+            especialidad->setDescripcion(descripcion);
+            break; // Salimos del bucle For
+        }
+    }
+    escribirArchivoBin(listaEspecialidades, pathArchivo);
+}
+
+void EspecialidadController::eliminarEspecialidad(int idEspecialidad, String^ pathArchivo) {
+    List<Especialidad^>^ listaEspecialidades = listarEspecialidadesBin(pathArchivo);
+    for (int i = 0; i < listaEspecialidades->Count; i++) {
+        Especialidad^ especialidad = listaEspecialidades[i];
+        if (especialidad->getIdEspecialidad() == idEspecialidad) {
+            listaEspecialidades->RemoveAt(i);
+            break; // Salimos del bucle For
+        }
+    }
+    escribirArchivoBin(listaEspecialidades, pathArchivo);
+}
+
+Especialidad^ EspecialidadController::buscarEspecialidadByIdBin(int idEspecialidad, String^ pathArchivo) {
+    List<Especialidad^>^ listaEspecialidades = listarEspecialidadesBin(pathArchivo);
+    Especialidad^ especialidadEncontrado = gcnew Especialidad();
+    for each (Especialidad ^ especialidad in listaEspecialidades) {
+        if (especialidad->getIdEspecialidad() == idEspecialidad) {
+            // Verificar por ID de especialidad
+            especialidadEncontrado->setIdEspecialidad(especialidad->getIdEspecialidad());
+            especialidadEncontrado->setNombre(especialidad->getNombre());
+            especialidadEncontrado->setDescripcion(especialidad->getDescripcion());
+            break;
+        }
+    }
+    return especialidadEncontrado;
+}
+
+// Método para buscar especialidades por nombr
+List<Especialidad^>^ EspecialidadController::buscarEspecialidadByNombreBin(String^ sNombre, String^ pathArchivo) {
+    List<Especialidad^>^ listaEspecialidades = listarEspecialidadesBin(pathArchivo);
+    List<Especialidad^>^ listaEncontrados = gcnew List<Especialidad^>();
+    for each (Especialidad ^ especialidad in listaEspecialidades) {
+        if (especialidad->getNombre()->Contains(sNombre)) {
+            // Contiene el nombre
+            listaEncontrados->Add(especialidad);
+        }
+    }
+    return listaEncontrados;
 }

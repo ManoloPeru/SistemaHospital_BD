@@ -5,6 +5,7 @@ namespace SistemaHospitalModel {
     
     using namespace System;
 
+    [Serializable]
     public ref class Especialidad {
     private:
         int idEspecialidad;

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CitaMedica.h" />
+    <ClInclude Include="Cita.h" />
     <ClInclude Include="EquipoMedico.h" />
     <ClInclude Include="Especialidad.h" />
     <ClInclude Include="HistorialMedico.h" />
@@ -30,7 +30,7 @@
     <ClInclude Include="Tratamiento.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CitaMedica.cpp" />
+    <ClCompile Include="Cita.cpp" />
     <ClCompile Include="EquipoMedico.cpp" />
     <ClCompile Include="Especialidad.cpp" />
     <ClCompile Include="HistorialMedico.cpp" />

@@ -117,14 +117,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseController.h" />
+    <ClInclude Include="CitaController.h" />
+    <ClInclude Include="EquipoMedicoController.h" />
     <ClInclude Include="EspecialidadController.h" />
+    <ClInclude Include="HelperController.h" />
     <ClInclude Include="MedicoController.h" />
+    <ClInclude Include="PacienteController.h" />
     <ClInclude Include="PersonaController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseController.cpp" />
+    <ClCompile Include="CitaController.cpp" />
+    <ClCompile Include="EquipoMedicoController.cpp" />
     <ClCompile Include="EspeciaidadController.cpp" />
+    <ClCompile Include="HelperController.cpp" />
     <ClCompile Include="MedicoController.cpp" />
+    <ClCompile Include="PacienteController.cpp" />
     <ClCompile Include="PersonaController.cpp" />
   </ItemGroup>
   <ItemGroup>

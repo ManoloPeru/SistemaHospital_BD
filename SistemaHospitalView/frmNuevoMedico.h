@@ -86,6 +86,7 @@ namespace SistemaHospitalView {
 
 
 
+
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -101,7 +102,6 @@ namespace SistemaHospitalView {
 		{
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->dgvCertificaciones = (gcnew System::Windows::Forms::DataGridView());
-			this->colCertificacion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->dgvEspecialidades = (gcnew System::Windows::Forms::DataGridView());
 			this->txtNumeroColegioMedico = (gcnew System::Windows::Forms::TextBox());
 			this->txtIdMedico = (gcnew System::Windows::Forms::TextBox());
@@ -134,6 +134,7 @@ namespace SistemaHospitalView {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->btnGrabar = (gcnew System::Windows::Forms::Button());
 			this->btnCancelar = (gcnew System::Windows::Forms::Button());
+			this->colCertificacion = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->groupBox2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCertificaciones))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvEspecialidades))->BeginInit();
@@ -166,19 +167,12 @@ namespace SistemaHospitalView {
 			this->dgvCertificaciones->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvCertificaciones->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->colCertificacion });
 			this->dgvCertificaciones->GridColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->dgvCertificaciones->Location = System::Drawing::Point(574, 121);
+			this->dgvCertificaciones->Location = System::Drawing::Point(550, 121);
 			this->dgvCertificaciones->Name = L"dgvCertificaciones";
 			this->dgvCertificaciones->RowHeadersWidth = 51;
 			this->dgvCertificaciones->RowTemplate->Height = 24;
-			this->dgvCertificaciones->Size = System::Drawing::Size(854, 157);
+			this->dgvCertificaciones->Size = System::Drawing::Size(878, 157);
 			this->dgvCertificaciones->TabIndex = 14;
-			// 
-			// colCertificacion
-			// 
-			this->colCertificacion->HeaderText = L"Certificación";
-			this->colCertificacion->MinimumWidth = 6;
-			this->colCertificacion->Name = L"colCertificacion";
-			this->colCertificacion->Width = 785;
 			// 
 			// dgvEspecialidades
 			// 
@@ -217,7 +211,7 @@ namespace SistemaHospitalView {
 			// label16
 			// 
 			this->label16->AutoSize = true;
-			this->label16->Location = System::Drawing::Point(569, 58);
+			this->label16->Location = System::Drawing::Point(545, 53);
 			this->label16->Margin = System::Windows::Forms::Padding(5, 0, 5, 0);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(162, 29);
@@ -288,6 +282,7 @@ namespace SistemaHospitalView {
 			// 
 			this->dtpFecNacimiento->CalendarMonthBackground = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
 				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->dtpFecNacimiento->Format = System::Windows::Forms::DateTimePickerFormat::Short;
 			this->dtpFecNacimiento->Location = System::Drawing::Point(256, 123);
 			this->dtpFecNacimiento->MinDate = System::DateTime(1900, 1, 1, 0, 0, 0, 0);
 			this->dtpFecNacimiento->Name = L"dtpFecNacimiento";
@@ -484,7 +479,7 @@ namespace SistemaHospitalView {
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(545, 245);
+			this->label11->Location = System::Drawing::Point(541, 243);
 			this->label11->Margin = System::Windows::Forms::Padding(5, 0, 5, 0);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(204, 29);
@@ -550,6 +545,13 @@ namespace SistemaHospitalView {
 			this->btnCancelar->Text = L"Cancelar";
 			this->btnCancelar->UseVisualStyleBackColor = false;
 			this->btnCancelar->Click += gcnew System::EventHandler(this, &frmNuevoMedico::btnCancelar_Click);
+			// 
+			// colCertificacion
+			// 
+			this->colCertificacion->HeaderText = L"Certificación";
+			this->colCertificacion->MinimumWidth = 6;
+			this->colCertificacion->Name = L"colCertificacion";
+			this->colCertificacion->Width = 790;
 			// 
 			// frmNuevoMedico
 			// 
@@ -668,5 +670,5 @@ namespace SistemaHospitalView {
 		}
 	}
 	
-	};
+};
 }

@@ -165,7 +165,7 @@ namespace SistemaHospitalView {
 			Persona^ objPersona = objController->buscarPersonaByUsuario(usuario, contrasenia);
 			if (objPersona != nullptr)
 			{
-				frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal();
+				frmPrincipal^ ventanaPrincipal = gcnew frmPrincipal(objPersona);
 				ventanaPrincipal->ShowDialog();
 				this->Close();
 			}

@@ -16,5 +16,13 @@ namespace SistemaHospitalController {
 		/****************************************************************************************************************************/
 		/****************************************************************************************************************************/
 		/****************************************************************************************************************************/
+		// Método para listar especialidades desde un archivo binario
+		List<Especialidad^>^ listarEspecialidadesBin(String^ pathArchivo);
+		void escribirArchivoBin(List<Especialidad^>^ listaEspecialidades, String^ pathArchivo);
+		void agregarEspecialidad(int idEspecialidad, String^ nombre, String^ descripcion, String^ pathArchivo);
+		void modificarEspecialidad(int idEspecialidad, String^ nombre, String^ descripcion, String^ pathArchivo);
+		void eliminarEspecialidad(int idEspecialidad, String^ pathArchivo);
+		Especialidad^ buscarEspecialidadByIdBin(int idEspecialidad, String^ pathArchivo);
+		List<Especialidad^>^ buscarEspecialidadByNombreBin(String^ sNombre, String^ pathArchivo);
 	};
 }
