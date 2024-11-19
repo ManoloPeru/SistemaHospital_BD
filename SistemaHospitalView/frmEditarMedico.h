@@ -49,31 +49,9 @@ namespace SistemaHospitalView {
 
 	protected:
 
-
-
-
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox1;
-
-
 	private: System::Windows::Forms::Button^ btnGrabar;
 	private: System::Windows::Forms::Button^ btnCancelar;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::TextBox^ txtNumeroColegioMedico;
 	private: System::Windows::Forms::TextBox^ txtIdMedico;
@@ -81,8 +59,6 @@ namespace SistemaHospitalView {
 	private: System::Windows::Forms::Label^ label18;
 	private: System::Windows::Forms::DataGridView^ dgvEspecialidades;
 	private: System::Windows::Forms::DataGridView^ dgvCertificaciones;
-
-
 
 		   /* Este atributo se crea porque el constructor está recibiendo un objeto del tipo Medico y
 		   ese objeto hay que asignarselo a un atributo */
@@ -619,12 +595,15 @@ namespace SistemaHospitalView {
 		this->txtApellidos->Text = this->objMedico->getApellidos();
 		int iFechaNacimiento = this->objMedico->getFechaNacimiento();
 		this->dtpFecNacimiento->Value = helper->intFechaToDateTime(iFechaNacimiento);
-		this->txtDireccion->Text = this->objMedico->getDireccion();
 		this->cmbGenero->Text = this->objMedico->getGenero();
+		this->txtDireccion->Text = this->objMedico->getDireccion();
+		this->txtTelefonos->Text = this->objMedico->getTelefonos();
 		this->txtEmail->Text = this->objMedico->getEmail();
 		this->cmbEstadoCivil->Text = this->objMedico->getEstadoCivil();
-		this->txtTelefonos->Text = this->objMedico->getTelefonos();
 		this->txtAltura->Text = Convert::ToString(this->objMedico->getAltura());
+		this->cmbTipoDocumento->Text = this->objMedico->getTipoDocumento();
+		this->txtNumeroDocumento->Text = this->objMedico->getNumeroDocumento();
+
 		this->txtIdMedico->Text = Convert::ToString(this->objMedico->getIdMedico());
 		this->txtNumeroColegioMedico->Text = this->objMedico->getNumeroColegioMedico();
 
@@ -666,14 +645,17 @@ namespace SistemaHospitalView {
 		String^ nombres = this->txtNombres->Text;
 		String^ apellidos = this->txtApellidos->Text;
 		DateTime dFechaNacimiento = this->dtpFecNacimiento->Value; //retorna la fecha
-		//Me da el formato deseado: yyyyMMdd
+		//Le damos el formato deseado INT: yyyyMMdd
 		int iFechaNacimiento = helper->dateTimeTointFecha(dFechaNacimiento);
-		String^ direccion = this->txtDireccion->Text;
 		String^ genero = this->cmbGenero->Text;
+		String^ direccion = this->txtDireccion->Text;
+		String^ telefonos = this->txtTelefonos->Text;
 		String^ email = this->txtEmail->Text;
 		String^ estadoCivil = this->cmbEstadoCivil->Text;
-		String^ telefonos = this->txtTelefonos->Text;
 		double altura = Convert::ToDouble(this->txtAltura->Text);
+		String^ tipoDocumento = this->cmbTipoDocumento->Text;
+		String^ numeroDocumento = this->txtNumeroDocumento->Text;
+
 		int idMedico = Convert::ToInt32(this->txtIdMedico->Text);
 		String^ numeroColegioMedico = this->txtNumeroColegioMedico->Text;
 		
@@ -710,9 +692,17 @@ namespace SistemaHospitalView {
 		MedicoController^ objMedico = gcnew MedicoController();
 		//Procedimiento con archivo plano
 		//objMedico->modificarMedico(idPersona, nombre, edad, genero, direccion, telefono, email, estadoCivil, altura, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
-		MessageBox::Show("La información del Médico ha sido actualizado con éxito...!", "Actualización Exitosa",
-			MessageBoxButtons::OK, MessageBoxIcon::Information);
-		this->Close();
+		String^ sMessageBox = objMedico->updateMedico(idPersona, apellidos, nombres, iFechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
+		if (sMessageBox->Equals(""))
+		{
+			MessageBox::Show("La información del Médico ha sido actualizado con éxito...!", "Actualización Exitosa",
+				MessageBoxButtons::OK, MessageBoxIcon::Information);
+			this->Close();
+		}
+		else
+		{
+			MessageBox::Show(sMessageBox, "Error en Actualización", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 };
 }

@@ -656,17 +656,16 @@ namespace SistemaHospitalView {
 		MedicoController^ objMedico = gcnew MedicoController();
 		//Procedimiento con archivo plano
 		//objMedico->agregarMedico(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
-		int iResultado = objMedico->insertMedico(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
-		if (iResultado > 0)
+		String^ sMessageBox = objMedico->insertMedico(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento, idMedico, numeroColegioMedico, certificaciones, especialidades, idCitasAsignadas, pacientesAsociados);
+		if (Convert::ToInt32(sMessageBox) > 0)
 		{
-			MessageBox::Show("La información del Médico se ha reistrado con éxito...!", "Grabación Exitosa",
+			MessageBox::Show("La información del Médico se ha registrado con éxito...!", "Grabación Exitosa",
 				MessageBoxButtons::OK, MessageBoxIcon::Information);
 			this->Close();
 		}
 		else
 		{
-			MessageBox::Show("Se han encontado errores, por favor, revisar la información del Médico...!", "Error en Grabación",
-				MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show(sMessageBox, "Error en Grabación", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 	

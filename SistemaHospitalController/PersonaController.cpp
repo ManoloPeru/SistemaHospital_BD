@@ -71,8 +71,8 @@ Persona^ PersonaController::buscarPersonaById(int idPersona) {
 /*************************************************************************************************************/
 /*************************************************************************************************************/
 //Operaciones con Base de Datos
-int PersonaController::insertPersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento) {
-    int idPersonaGenerado = 0;
+String^ PersonaController::insertPersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento) {
+    String^ sMessageBox = "";
     try
     {
         abrirConexion();
@@ -84,28 +84,111 @@ int PersonaController::insertPersona(int idPersona, String^ apellidos, String^ n
         SqlCommand^ objCommand = gcnew SqlCommand();
         objCommand->CommandText = sSql;
         objCommand->Connection = this->getObjConexion();
-        // Ejecutar el comando y obtener el ID generado
-        idPersonaGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+        // Ejecutar el comando y obtener el idPersona que la BD ha asignado
+        int idPersona = Convert::ToInt32(objCommand->ExecuteScalar());
+        sMessageBox = Convert::ToString(idPersona); //Pasamos un idPersona valido en formato string
     }
     catch (SqlException^ ex)
     {
         // Manejar excepciones relacionadas con SQL Server
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error de base de datos: " + ex->Message;
     }
     catch (InvalidOperationException^ ex)
     {
         // Manejar excepciones relacionadas con operaciones no válidas
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error de operaciones no válidas: " + ex->Message;
     }
     catch (Exception^ ex)
     {
         // Manejar cualquier otra excepción general
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error: " + ex->Message;
     }
     finally {
         cerrarConexion();
     }
-    return idPersonaGenerado;
+    return sMessageBox;
+}
+
+String^ PersonaController::updatePersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento) {
+    String^ sMessageBox = "";
+    try
+    {
+        abrirConexion();
+        //Actualizamos los datos de la persona
+        //Importante: idPersona, debe formar parte de la clausula WHERE
+        String^ sSql = "update persona set ";
+        sSql += " apellidos = '" + apellidos + "', ";
+        sSql += " nombres = '" + nombres + "', ";
+        sSql += " fechaNacimiento = " + fechaNacimiento + ", ";
+        sSql += " genero = '" + genero + "', ";
+        sSql += " direccion = '" + direccion + "', ";
+        sSql += " telefonos = '" + telefonos + "', ";
+        sSql += " email = '" + email + "', ";
+        sSql += " estadoCivil = '" + estadoCivil + "', ";
+        sSql += " altura = " + altura + ", ";
+        sSql += " tipodocumento = '" + tipoDocumento + "', ";
+        sSql += " numerodocumento = '" + numeroDocumento + "' ";
+        sSql += " where idPersona =  " + idPersona + " ";
+        SqlCommand^ objCommand = gcnew SqlCommand();
+        objCommand->CommandText = sSql;
+        objCommand->Connection = this->getObjConexion();
+        // Ejecutar la sentencia
+        objCommand->ExecuteNonQuery();
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        sMessageBox = "Error de operación no valida: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        sMessageBox = "Error: " + ex->Message;
+    }
+    finally {
+        cerrarConexion();
+    }
+    return sMessageBox;
+}
+
+String^ PersonaController::deletePersona(int idPersona) {
+    String^ sMessageBox = "";
+    try
+    {
+        abrirConexion();
+        //Eliminamos el registro de la persona
+        //Importante: idPersona, debe formar parte de la clausula WHERE
+        String^ sSql = "delete from persona where idPersona =  " + idPersona + " ";
+        SqlCommand^ objCommand = gcnew SqlCommand();
+        objCommand->CommandText = sSql;
+        objCommand->Connection = this->getObjConexion();
+        // Ejecutar la sentencia
+        objCommand->ExecuteNonQuery();
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        sMessageBox = "Error de operación no valida: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        sMessageBox = "Error: " + ex->Message;
+    }
+    finally {
+        cerrarConexion();
+    }
+    return sMessageBox;
 }
 
 // Método que retorna la información de una persona por usuario y contraseña

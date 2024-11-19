@@ -12,8 +12,13 @@ namespace SistemaHospitalController {
 	public:
 		PersonaController();
 		List<Persona^>^ listarPersonas();
+		/*****************************************************************************************/
+		/*****************************************************************************************/
+		/*****************************************************************************************/
 		//Operaciones con Base de Datos
-		int insertPersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento);
+		String^ insertPersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento);
+		String^ updatePersona(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento);
+		String^ deletePersona(int idPersona);
 		Persona^ buscarPersonaById(int idPersona);
 		Persona^ buscarPersonaByUsuario(String^ usuario, String^ contrasenia);
 	};

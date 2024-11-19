@@ -399,14 +399,15 @@ Medico^ MedicoController::getMedicoById(int idMedico) {
     return objMedico;
 }
 
-int MedicoController::insertMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
-    int idMedicoGenerado = 0;
+String^ MedicoController::insertMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+    String^ sMessageBox = "";
     try
     {
         PersonaController^ objControler = gcnew PersonaController();
-        idPersona = objControler->insertPersona(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento);
-        if (idPersona > 0)
-        {
+        sMessageBox = objControler->insertPersona(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento);
+        if (Convert::ToInt32(sMessageBox) > 0)
+        {   //Si sMessageBox es un valor valido
+            idPersona = Convert::ToInt32(sMessageBox);
             abrirConexion();
             // Serializar certificaciones
             String^ listCertificados;
@@ -420,8 +421,8 @@ int MedicoController::insertMedico(int idPersona, String^ apellidos, String^ nom
             SqlCommand^ objCommand = gcnew SqlCommand();
             objCommand->CommandText = sSql;
             objCommand->Connection = this->getObjConexion();
-            // Ejecutar el comando y obtener el ID generado
-            idMedicoGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
+            // Ejecutar el comando y obtener el idMedico obtenido por la BD
+            int idMedicoGenerado = Convert::ToInt32(objCommand->ExecuteScalar());
             //Insertamos medico_especialidad: 
             for each(Especialidad^ objEspecialidad in especialidades) {
                 sSql = "Insert into medico_especialidad (idMedico, idEspecialidad)";
@@ -431,25 +432,135 @@ int MedicoController::insertMedico(int idPersona, String^ apellidos, String^ nom
                 objCommand->ExecuteNonQuery();
             }
         }
-        
     }
     catch (SqlException^ ex)
     {
         // Manejar excepciones relacionadas con SQL Server
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error de base de datos: " + ex->Message;
     }
     catch (InvalidOperationException^ ex)
     {
         // Manejar excepciones relacionadas con operaciones no válidas
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error de operaciones no válidas: " + ex->Message;
     }
     catch (Exception^ ex)
     {
         // Manejar cualquier otra excepción general
-        String^ sMessageBox = "Error de base de datos: " + ex->Message;
+        sMessageBox = "Error de base de datos: " + ex->Message;
     }
     finally {
         cerrarConexion();
     }
-    return idMedicoGenerado;
+    return sMessageBox;
+}
+
+String^ MedicoController::updateMedico(int idPersona, String^ apellidos, String^ nombres, int fechaNacimiento, String^ genero, String^ direccion, String^ telefonos, String^ email, String^ estadoCivil, float altura, String^ tipoDocumento, String^ numeroDocumento, int idMedico, String^ numeroColegioMedico, List<String^>^ certificaciones, List<Especialidad^>^ especialidades, List<int>^ idCitasAsignadas, List<Paciente^>^ pacientesAsociados) {
+    String^ sMessageBox = "";
+    try
+    {
+        PersonaController^ objControler = gcnew PersonaController();
+        sMessageBox = objControler->updatePersona(idPersona, apellidos, nombres, fechaNacimiento, genero, direccion, telefonos, email, estadoCivil, altura, tipoDocumento, numeroDocumento);
+        if (sMessageBox->Equals(""))
+        {
+            abrirConexion();
+            // Serializar certificaciones
+            String^ listCertificados;
+            if (certificaciones->Count > 0) {
+                listCertificados = String::Join(",", certificaciones);
+            }
+            //Insertamos la medico: idMedico no se remite, por cuanto el valor lo asigna la base de datos
+            String^ sSql = "Update medico Set ";
+            sSql += " idPersona = " + idPersona + ", ";
+            sSql += " numeroColegioMedico = '" + numeroColegioMedico + "', ";
+            sSql += " certificaciones = '" + listCertificados + "' ";
+            sSql += " Where idMedico = " + idMedico + " ";
+            SqlCommand^ objCommand = gcnew SqlCommand();
+            objCommand->CommandText = sSql;
+            objCommand->Connection = this->getObjConexion();
+            // Ejecutar la sentencia
+            objCommand->ExecuteNonQuery();
+
+            //Eliminamos todos los registros relacionados a idMedico en la tabla medico_especialidad
+            sSql = "Delete From medico_especialidad Where idMedico = " + idMedico + " " ;
+            objCommand->CommandText = sSql;
+            objCommand->Connection = this->getObjConexion();
+            objCommand->ExecuteNonQuery();
+            //Volvemos a insertar todos las especialidades del idMedico en medico_especialidad: 
+            for each (Especialidad ^ objEspecialidad in especialidades) {
+                sSql = "Insert into medico_especialidad (idMedico, idEspecialidad)";
+                sSql += " values(" + idMedico + ", " + objEspecialidad->getIdEspecialidad() + ")";
+                objCommand->CommandText = sSql;
+                objCommand->Connection = this->getObjConexion();
+                objCommand->ExecuteNonQuery();
+            }
+        }
+
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        sMessageBox = "Error de operaciones no válidas: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        sMessageBox = "Error: " + ex->Message;
+    }
+    finally {
+        cerrarConexion();
+    }
+    return sMessageBox;
+}
+
+String^ MedicoController::deleteMedico(int idMedico) {
+    String^ sMessageBox = "";
+    try
+    {
+        Medico^ objMedico = getMedicoById(idMedico);
+        
+        abrirConexion();
+        SqlCommand^ objCommand = gcnew SqlCommand();
+
+        //Tablas dependientes
+        //Eliminamos todos los registros relacionados a idMedico en la tabla medico_especialidad
+        String^ sSql = "Delete From medico_especialidad Where idMedico = " + idMedico + " ";
+        objCommand->CommandText = sSql;
+        objCommand->Connection = this->getObjConexion();
+        objCommand->ExecuteNonQuery();
+
+        //Registro
+        //Eliminamos el registro relacionado a idMedico en la tabla medico
+        sSql = "Delete From medico Where idMedico = " + idMedico + " ";
+        objCommand->CommandText = sSql;
+        objCommand->Connection = this->getObjConexion();
+        objCommand->ExecuteNonQuery();
+
+        cerrarConexion();
+
+        //Analizar si tambien hay que eliminar al Padre, por tratrse de una herencia
+        //Eliminamos el registro relacionado a idMedico en la tabla Persona
+        PersonaController^ objController = gcnew PersonaController();
+        sMessageBox = objController->deletePersona(objMedico->getIdPersona());
+    }
+    catch (SqlException^ ex)
+    {
+        // Manejar excepciones relacionadas con SQL Server
+        sMessageBox = "Error de base de datos: " + ex->Message;
+    }
+    catch (InvalidOperationException^ ex)
+    {
+        // Manejar excepciones relacionadas con operaciones no válidas
+        sMessageBox = "Error de operaciones no válidas: " + ex->Message;
+    }
+    catch (Exception^ ex)
+    {
+        // Manejar cualquier otra excepción general
+        sMessageBox = "Error: " + ex->Message;
+    }
+    return sMessageBox;
 }

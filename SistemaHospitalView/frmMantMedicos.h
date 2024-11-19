@@ -383,7 +383,7 @@ namespace SistemaHospitalView {
 		ventanaNuevoMedico->ShowDialog();
 		this->dgvLista->Rows->Clear();
 		MedicoController^ medicoController = gcnew MedicoController();
-		List<Medico^>^ listaMedicos = medicoController->listarMedicos();
+		List<Medico^>^ listaMedicos = medicoController->selectMedicos();
 		mostrarGrilla(listaMedicos);
 	}
 
@@ -407,9 +407,14 @@ namespace SistemaHospitalView {
 		for (int i = 0; i < this->dgvLista->SelectedRows->Count; i++) {
 			int filaSeleccionada = this->dgvLista->SelectedRows[i]->Index;
 			int idEliminar = Convert::ToInt32(this->dgvLista->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
-			medicoController->eliminarMedico(idEliminar);
+			medicoController->deleteMedico(idEliminar);
 		}
-		MessageBox::Show("El alumno ha sido eliminado con éxito");
+		MessageBox::Show("La información del Médico se elimino correctamente...!", "Eliminación Exitosa",
+			MessageBoxButtons::OK, MessageBoxIcon::Information);
+		
+		this->dgvLista->Rows->Clear();
+		List<Medico^>^ listaMedicos = medicoController->selectMedicos(); // listarMedicos();
+		mostrarGrilla(listaMedicos);
 	}
 
 	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e) {
