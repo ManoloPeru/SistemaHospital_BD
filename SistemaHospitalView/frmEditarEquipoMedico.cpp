@@ -1,0 +1,2 @@
+#include "frmEditarEquipoMedico.h"
+

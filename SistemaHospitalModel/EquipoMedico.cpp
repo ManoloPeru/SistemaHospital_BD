@@ -6,11 +6,11 @@ namespace SistemaHospitalModel {
 	EquipoMedico::EquipoMedico() {
 		this->idEquipo = 0;
 		this->nombre = "";
-		this->disponibilidad = true;
+		this->disponibilidad = "";
 	}
 
 	// Constructor con parámetros
-	EquipoMedico::EquipoMedico(int idEquipo, String^ nombre, bool disponibilidad) {
+	EquipoMedico::EquipoMedico(int idEquipo, String^ nombre, String^ disponibilidad) {
 		this->idEquipo = idEquipo;
 		this->nombre = nombre;
 		this->disponibilidad = disponibilidad;
@@ -25,7 +25,7 @@ namespace SistemaHospitalModel {
 		return this->nombre;
 	}
 
-	bool EquipoMedico::getDisponibilidad() {
+	String^ EquipoMedico::getDisponibilidad() {
 		return this->disponibilidad;
 	}
 
@@ -38,7 +38,7 @@ namespace SistemaHospitalModel {
 		this->nombre = nombre;
 	}
 
-	void EquipoMedico::setDisponibilidad(bool disponibilidad) {
+	void EquipoMedico::setDisponibilidad(String^ disponibilidad) {
 		this->disponibilidad = disponibilidad;
 	}
 

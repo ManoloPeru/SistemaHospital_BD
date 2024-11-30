@@ -122,13 +122,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="frmDetalleCita.cpp" />
-    <ClCompile Include="frmEditarEspecialidad.cpp" />
     <ClCompile Include="frmEditarMedico.cpp" />
     <ClCompile Include="frmLogin.cpp" />
+    <ClCompile Include="frmMantEquiposMedicos.cpp" />
     <ClCompile Include="frmMantEspecialidades.cpp" />
     <ClCompile Include="frmMantMedicos.cpp" />
     <ClCompile Include="frmMantPaciente.cpp" />
     <ClCompile Include="frmNuevaEspecialidad.cpp" />
+    <ClCompile Include="frmNuevoEquipoMedico.cpp" />
     <ClCompile Include="frmNuevoMedico.cpp" />
     <ClCompile Include="frmPrincipal.cpp" />
     <ClCompile Include="frmReporteEquiposMedicos.cpp" />
@@ -147,6 +148,9 @@
     <ClInclude Include="frmDetalleCita.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmEditarEquipoMedico.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmEditarEspecialidad.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -154,6 +158,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmLogin.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantEquiposMedicos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantEspecialidades.h">
@@ -166,6 +173,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevaEspecialidad.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmNuevoEquipoMedico.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmNuevoMedico.h">
@@ -182,6 +192,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmEditarEquipoMedico.resx">
+      <DependentUpon>frmEditarEquipoMedico.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarEspecialidad.resx">
       <DependentUpon>frmEditarEspecialidad.h</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantEquiposMedicos.resx">
+      <DependentUpon>frmMantEquiposMedicos.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantEspecialidades.resx">
       <DependentUpon>frmMantEspecialidades.h</DependentUpon>
@@ -202,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevaEspecialidad.resx">
       <DependentUpon>frmNuevaEspecialidad.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoEquipoMedico.resx">
+      <DependentUpon>frmNuevoEquipoMedico.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoMedico.resx">
       <DependentUpon>frmNuevoMedico.h</DependentUpon>

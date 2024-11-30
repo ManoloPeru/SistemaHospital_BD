@@ -3,6 +3,7 @@
 #include "frmVerCitas.h"
 #include "frmMantEspecialidades.h"
 #include "frmReporteEquiposMedicos.h"
+#include "frmMantEquiposMedicos.h"
 
 namespace SistemaHospitalView {
 
@@ -60,6 +61,7 @@ namespace SistemaHospitalView {
 	private: Persona^ objPersona;
 	private: System::Windows::Forms::ToolStripMenuItem^ gestiónDeEspecialidadesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ equiposMédicosToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ equiposMédicosToolStripMenuItem1;
 
 	private:
 		/// <summary>
@@ -86,6 +88,7 @@ namespace SistemaHospitalView {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->tssLblFechaHora = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->tssLblUsuario = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->equiposMédicosToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -107,9 +110,9 @@ namespace SistemaHospitalView {
 			// 
 			// mantenimientoToolStripMenuItem
 			// 
-			this->mantenimientoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->mantenimientoToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->medicoToolStripMenuItem,
-					this->gestiónDeEspecialidadesToolStripMenuItem
+					this->gestiónDeEspecialidadesToolStripMenuItem, this->equiposMédicosToolStripMenuItem1
 			});
 			this->mantenimientoToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"mantenimientoToolStripMenuItem.Image")));
 			this->mantenimientoToolStripMenuItem->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -195,6 +198,13 @@ namespace SistemaHospitalView {
 			this->tssLblUsuario->Spring = true;
 			this->tssLblUsuario->Text = L"tssLblUsuario";
 			// 
+			// equiposMédicosToolStripMenuItem1
+			// 
+			this->equiposMédicosToolStripMenuItem1->Name = L"equiposMédicosToolStripMenuItem1";
+			this->equiposMédicosToolStripMenuItem1->Size = System::Drawing::Size(378, 36);
+			this->equiposMédicosToolStripMenuItem1->Text = L"Equipos médicos";
+			this->equiposMédicosToolStripMenuItem1->Click += gcnew System::EventHandler(this, &frmPrincipal::equiposMédicosToolStripMenuItem1_Click);
+			// 
 			// frmPrincipal
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(14, 29);
@@ -256,5 +266,10 @@ namespace SistemaHospitalView {
 		ventanaEspecialidades->MdiParent = this;
 		ventanaEspecialidades->Show();
 	}
-	};
+	private: System::Void equiposMédicosToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmMantEquiposMedicos^ ventanaEquiposMedicos = gcnew frmMantEquiposMedicos();
+		ventanaEquiposMedicos->MdiParent = this;
+		ventanaEquiposMedicos->Show();
+	}
+};
 }
