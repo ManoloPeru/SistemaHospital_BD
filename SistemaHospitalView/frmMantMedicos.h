@@ -210,7 +210,7 @@ namespace SistemaHospitalView {
 			this->dgvLista->RowTemplate->Height = 24;
 			this->dgvLista->Size = System::Drawing::Size(1491, 477);
 			this->dgvLista->TabIndex = 1;
-			this->dgvLista->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantMedicos::dataGridView1_CellContentClick);
+			this->dgvLista->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &frmMantMedicos::dgvLista_CellContentClick);
 			// 
 			// btnNuevo
 			// 
@@ -348,7 +348,7 @@ namespace SistemaHospitalView {
 
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	private: System::Void dgvLista_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 
 	private: System::Void frmMantMedicos_Load(System::Object^ sender, System::EventArgs^ e) {

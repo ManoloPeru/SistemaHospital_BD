@@ -564,3 +564,15 @@ String^ MedicoController::deleteMedico(int idMedico) {
     }
     return sMessageBox;
 }
+
+List<Medico^>^ MedicoController::selectMedicosByApellido(String^ apellido) {
+    List<Medico^>^ listaMedicos = selectMedicos();
+    List<Medico^>^ medicosEncontrados = gcnew List<Medico^>();
+    for each (Medico ^ medico in listaMedicos) {
+        if (medico->getApellidos()->Contains(apellido)) {
+            // Verificar por ID de médico
+            medicosEncontrados->Add(medico);
+        }
+    }
+    return medicosEncontrados;
+}

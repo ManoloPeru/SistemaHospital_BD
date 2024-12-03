@@ -91,4 +91,20 @@ namespace SistemaHospitalModel {
     void Cita::setTratamientoProgramado(Tratamiento^ tratamientoProgramado) {
         this->tratamientoProgramado = tratamientoProgramado;
     }
+
+    //adicionales
+    String^ Cita::getNombrePaciente() {
+        return this->nombrePaciente;
+    }
+
+    String^ Cita::getNombreMedico() {
+        return this->nombreMedico;
+    }
+    void Cita::setNombrePaciente(String^ nombrePaciente) {
+        this->nombrePaciente = nombrePaciente;
+    }
+
+    void Cita::setNombreMedico(String^ nombreMedico) {
+        this->nombreMedico = nombreMedico;
+    }
 }

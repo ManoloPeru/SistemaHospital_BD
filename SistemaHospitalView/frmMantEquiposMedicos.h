@@ -45,7 +45,7 @@ namespace SistemaHospitalView {
 	private: System::Windows::Forms::TextBox^ txtNombre;
 
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridView^ dgvLista;
 
 
 
@@ -76,7 +76,7 @@ namespace SistemaHospitalView {
 			this->btnBuscar = (gcnew System::Windows::Forms::Button());
 			this->txtNombre = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->dgvLista = (gcnew System::Windows::Forms::DataGridView());
 			this->colId = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colDisonibilidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -84,7 +84,7 @@ namespace SistemaHospitalView {
 			this->btnEditar = (gcnew System::Windows::Forms::Button());
 			this->btnEliminar = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox1
@@ -130,20 +130,20 @@ namespace SistemaHospitalView {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Nombre :";
 			// 
-			// dataGridView1
+			// dgvLista
 			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+			this->dgvLista->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvLista->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
 				this->colId,
 					this->ColNombre, this->colDisonibilidad
 			});
-			this->dataGridView1->Location = System::Drawing::Point(14, 157);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(990, 357);
-			this->dataGridView1->TabIndex = 1;
+			this->dgvLista->Location = System::Drawing::Point(14, 157);
+			this->dgvLista->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
+			this->dgvLista->Name = L"dgvLista";
+			this->dgvLista->RowHeadersWidth = 51;
+			this->dgvLista->RowTemplate->Height = 24;
+			this->dgvLista->Size = System::Drawing::Size(990, 357);
+			this->dgvLista->TabIndex = 1;
 			// 
 			// colId
 			// 
@@ -207,7 +207,7 @@ namespace SistemaHospitalView {
 			this->Controls->Add(this->btnEliminar);
 			this->Controls->Add(this->btnEditar);
 			this->Controls->Add(this->btnNuevo);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->dgvLista);
 			this->Controls->Add(this->groupBox1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -216,7 +216,7 @@ namespace SistemaHospitalView {
 			this->Text = L"Gestión de Equipos Médicos";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -238,7 +238,7 @@ namespace SistemaHospitalView {
 
 
 	public: void mostrarGrilla(List<EquipoMedico^>^ listaEquipos) {
-		this->dataGridView1->Rows->Clear();
+		this->dgvLista->Rows->Clear();
 		for (int i = 0; i < listaEquipos->Count; i++) {
 			EquipoMedico^ equipo = listaEquipos[i];
 			array<String^>^ filaGrilla = gcnew array<String^>(3);
@@ -246,21 +246,21 @@ namespace SistemaHospitalView {
 			filaGrilla[1] = equipo->getNombre();
 			filaGrilla[2] = equipo->getDisponibilidad();
 
-			this->dataGridView1->Rows->Add(filaGrilla);
+			this->dgvLista->Rows->Add(filaGrilla);
 		}
 	}
 
 	private: System::Void btnNuevo_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		frmNuevoEquipoMedico^ ventanaNuevoProfesor = gcnew frmNuevoEquipoMedico();
-		ventanaNuevoProfesor->ShowDialog();
+		frmNuevoEquipoMedico^ ventanaNuevoEquipo = gcnew frmNuevoEquipoMedico();
+		ventanaNuevoEquipo->ShowDialog();
 		EquipoMedicoController^ equipoController = gcnew EquipoMedicoController();
 		List<EquipoMedico^>^ listaEquipos = equipoController->listarEquiposMedicosAll();
 		mostrarGrilla(listaEquipos);
 	}
 	private: System::Void btnEditar_Click(System::Object^ sender, System::EventArgs^ e) {
-		int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
-		int idEditar = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
+		int filaSeleccionada = this->dgvLista->SelectedRows[0]->Index;
+		int idEditar = Convert::ToInt32(this->dgvLista->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
 		EquipoMedicoController^ equipoController = gcnew EquipoMedicoController();
 		EquipoMedico^ equipo = equipoController->buscarEquipoMedicoById(idEditar);
 
@@ -272,8 +272,8 @@ namespace SistemaHospitalView {
 	}
 	private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		int filaSeleccionada = this->dataGridView1->SelectedRows[0]->Index;
-		int idEliminar = Convert::ToInt32(this->dataGridView1->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
+		int filaSeleccionada = this->dgvLista->SelectedRows[0]->Index;
+		int idEliminar = Convert::ToInt32(this->dgvLista->Rows[filaSeleccionada]->Cells[0]->Value->ToString());
 		EquipoMedicoController^ equipoController = gcnew EquipoMedicoController();
 		equipoController->eliminarEquipoMedico(idEliminar);
 		MessageBox::Show("El equipoMedico se ha eliminado con éxito");

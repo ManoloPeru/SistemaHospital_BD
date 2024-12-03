@@ -121,9 +121,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="frmBuscarMedico.cpp" />
+    <ClCompile Include="frmBuscarPaciente.cpp" />
     <ClCompile Include="frmDetalleCita.cpp" />
     <ClCompile Include="frmEditarMedico.cpp" />
     <ClCompile Include="frmLogin.cpp" />
+    <ClCompile Include="frmMantCitas.cpp" />
     <ClCompile Include="frmMantEquiposMedicos.cpp" />
     <ClCompile Include="frmMantEspecialidades.cpp" />
     <ClCompile Include="frmMantMedicos.cpp" />
@@ -132,6 +135,7 @@
     <ClCompile Include="frmNuevoEquipoMedico.cpp" />
     <ClCompile Include="frmNuevoMedico.cpp" />
     <ClCompile Include="frmPrincipal.cpp" />
+    <ClCompile Include="frmRegistrarCita.cpp" />
     <ClCompile Include="frmReporteEquiposMedicos.cpp" />
     <ClCompile Include="frmVerCitas.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,6 +149,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frmBuscarMedico.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmBuscarPaciente.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmDetalleCita.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -158,6 +168,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmLogin.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="frmMantCitas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="frmMantEquiposMedicos.h">
@@ -184,6 +197,9 @@
     <ClInclude Include="frmPrincipal.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmRegistrarCita.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmReporteEquiposMedicos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -192,6 +208,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmBuscarMedico.resx">
+      <DependentUpon>frmBuscarMedico.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarPaciente.resx">
+      <DependentUpon>frmBuscarPaciente.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarEquipoMedico.resx">
       <DependentUpon>frmEditarEquipoMedico.h</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantCitas.resx">
+      <DependentUpon>frmMantCitas.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMantEquiposMedicos.resx">
       <DependentUpon>frmMantEquiposMedicos.h</DependentUpon>
@@ -227,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistrarCita.resx">
+      <DependentUpon>frmRegistrarCita.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReporteEquiposMedicos.resx">
       <DependentUpon>frmReporteEquiposMedicos.h</DependentUpon>

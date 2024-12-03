@@ -202,6 +202,10 @@ namespace SistemaHospitalView {
 		{
 			EquipoMedico^ especialidadEncontrado = gcnew EquipoMedico();
 			for each (EquipoMedico ^ especialidad in listaEquipos) {
+				if (especialidad->getIdEquipo() == id)
+				{
+					continue; //No se compara consigo mismo.
+				}
 				if (especialidad->getNombre()->ToUpper()->Equals(nombre->ToUpper())) {
 					// Verificar por ID de especialidad
 					MessageBox::Show("El equipo médico ya se encuentra registrado");
@@ -213,7 +217,7 @@ namespace SistemaHospitalView {
 		if (bActualizar)
 		{
 			equipoController->actualizarEquipoMedico(id, nombre, disponibilidad);
-			MessageBox::Show("El equipoMedico se ha actualizado con éxito");
+			MessageBox::Show("El Equipo Médico se ha actualizado con éxito");
 		}
 		this->Close();
 	}

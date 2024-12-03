@@ -18,6 +18,10 @@ namespace SistemaHospitalModel {
         String^ resultado;
         Tratamiento^ tratamientoProgramado; // Referencia a un objeto Tratamiento
 
+        //Atributos adicionales para las consultas o reportes
+        String^ nombrePaciente;
+        String^ nombreMedico;
+
     public:
         // Constructor vacío
         Cita();
@@ -44,5 +48,11 @@ namespace SistemaHospitalModel {
         void setProposito(String^ proposito);
         void setResultado(String^ resultado);
         void setTratamientoProgramado(Tratamiento^ tratamientoProgramado);
+
+        //Atributos adicionales
+        String^ getNombrePaciente();
+        String^ getNombreMedico();
+        void setNombrePaciente(String^ nombrePaciente);
+        void setNombreMedico(String^ nombreMedico);
     };
 }
