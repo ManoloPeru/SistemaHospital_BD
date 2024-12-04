@@ -43,7 +43,7 @@ namespace SistemaHospitalModel {
 	}
 
 
-	/* Metodos de la clase ReporteEquipoMedico */
+	/* Metodos de la clase ReporteCita */
 		// Constructor vacío
 	ReporteEquipoMedico::ReporteEquipoMedico() {
 		this->equipo = "";

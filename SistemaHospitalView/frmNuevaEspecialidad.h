@@ -173,6 +173,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmNuevaEspecialidad";
 			this->Text = L"Nueva Especialidad";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -202,7 +203,7 @@ namespace SistemaHospitalView {
 		// Navega hacia la carpeta padre dos niveles arriba para eliminar "x64\Debug"
 		String^ rutaBase = Directory::GetParent(Directory::GetParent(rutaEjecucion)->FullName)->FullName;
 		// Añade la subcarpeta "bin"
-		String^ rutaFinal = Path::Combine(rutaBase, "bin\\");
+		String^ rutaFinal = Path::Combine(rutaBase, "binario\\");
 		return rutaFinal;
 	}
 	};

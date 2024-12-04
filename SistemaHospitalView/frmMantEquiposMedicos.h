@@ -134,8 +134,8 @@ namespace SistemaHospitalView {
 			// 
 			this->dgvLista->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvLista->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
-				this->colId,
-					this->ColNombre, this->colDisonibilidad
+				this->colId, this->ColNombre,
+					this->colDisonibilidad
 			});
 			this->dgvLista->Location = System::Drawing::Point(14, 157);
 			this->dgvLista->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
@@ -214,6 +214,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->Name = L"frmMantEquiposMedicos";
 			this->Text = L"Gestión de Equipos Médicos";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->EndInit();

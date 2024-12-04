@@ -17,8 +17,7 @@ List<EquipoMedico^>^ EquipoMedicoController::listarEquipoMedico() {
         //Clase Persona
         int idEquipoMedico = Convert::ToInt32(datos[0]);
         String^ nombre = datos[1];
-        String^ disponible = datos[2];
-		String^ disponibilidad = datos[3];
+        String^ disponibilidad = datos[2];
 
         // Crear objeto EquipoMedico y añadir a la lista
         EquipoMedico^ equipoMedico = gcnew EquipoMedico();

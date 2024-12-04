@@ -18,5 +18,6 @@ namespace SistemaHospitalController {
 		//BD
 		List<Cita^>^ selectCita(String^ fecha);
 		void insertCita(int idPaciente, int idMedico, String^ fecha, String^ hora);
+		List<ReporteCita^>^ contarCantidadCitas();
 	};
 }

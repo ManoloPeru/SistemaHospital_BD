@@ -202,6 +202,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmBuscarMedico";
 			this->Text = L"frmBuscarMedico";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmBuscarMedico::frmBuscarMedico_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->EndInit();
 			this->groupBox1->ResumeLayout(false);

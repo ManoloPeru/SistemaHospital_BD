@@ -331,7 +331,7 @@ namespace SistemaHospitalView {
 		// Navega hacia la carpeta padre dos niveles arriba para eliminar "x64\Debug"
 		String^ rutaBase = Directory::GetParent(Directory::GetParent(rutaEjecucion)->FullName)->FullName;
 		// Añade la subcarpeta "bin"
-		String^ rutaFinal = Path::Combine(rutaBase, "bin\\");
+		String^ rutaFinal = Path::Combine(rutaBase, "binario\\");
 		return rutaFinal;
 	}
 

@@ -55,27 +55,27 @@ namespace SistemaHospitalView {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->chrtCantidadEquipos = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chrtCantidadEquipos))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// chrtCantidadEquipos
 			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chrtCantidadEquipos->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->chrtCantidadEquipos->Legends->Add(legend1);
+			chartArea2->Name = L"ChartArea1";
+			this->chrtCantidadEquipos->ChartAreas->Add(chartArea2);
+			legend2->Name = L"Legend1";
+			this->chrtCantidadEquipos->Legends->Add(legend2);
 			this->chrtCantidadEquipos->Location = System::Drawing::Point(14, 14);
-			this->chrtCantidadEquipos->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->chrtCantidadEquipos->Margin = System::Windows::Forms::Padding(5);
 			this->chrtCantidadEquipos->Name = L"chrtCantidadEquipos";
-			series1->ChartArea = L"ChartArea1";
-			series1->Legend = L"Legend1";
-			series1->Name = L"Series1";
-			this->chrtCantidadEquipos->Series->Add(series1);
-			this->chrtCantidadEquipos->Size = System::Drawing::Size(1038, 691);
+			series2->ChartArea = L"ChartArea1";
+			series2->Legend = L"Legend1";
+			series2->Name = L"Series1";
+			this->chrtCantidadEquipos->Series->Add(series2);
+			this->chrtCantidadEquipos->Size = System::Drawing::Size(1023, 642);
 			this->chrtCantidadEquipos->TabIndex = 0;
 			this->chrtCantidadEquipos->Text = L"chart1";
 			// 
@@ -83,13 +83,14 @@ namespace SistemaHospitalView {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(14, 29);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1170, 754);
+			this->ClientSize = System::Drawing::Size(1055, 671);
 			this->Controls->Add(this->chrtCantidadEquipos);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmReporteEquiposMedicos";
 			this->Text = L"Reporte Equipos Médicos";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmReporteEquiposMedicos::frmReporteEquiposMedicos_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chrtCantidadEquipos))->EndInit();
 			this->ResumeLayout(false);

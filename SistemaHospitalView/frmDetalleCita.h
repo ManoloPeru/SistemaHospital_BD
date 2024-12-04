@@ -197,6 +197,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmDetalleCita";
 			this->Text = L"Detalle Cita";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmDetalleCita::frmDetalleCita_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();

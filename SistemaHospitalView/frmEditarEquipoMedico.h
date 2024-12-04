@@ -181,6 +181,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->Name = L"frmEditarEquipoMedico";
 			this->Text = L"Editar Equipo Médico";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmEditarEquipoMedico::frmEditarEquipoMedico_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();

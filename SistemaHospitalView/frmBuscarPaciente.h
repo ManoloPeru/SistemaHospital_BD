@@ -82,11 +82,11 @@ namespace SistemaHospitalView {
 			this->txtApellido = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dgvLista = (gcnew System::Windows::Forms::DataGridView());
-			this->btnSeleccionar = (gcnew System::Windows::Forms::Button());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnSeleccionar = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLista))->BeginInit();
 			this->SuspendLayout();
@@ -97,9 +97,9 @@ namespace SistemaHospitalView {
 			this->groupBox1->Controls->Add(this->txtApellido);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Location = System::Drawing::Point(14, 14);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(5);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->groupBox1->Padding = System::Windows::Forms::Padding(5);
 			this->groupBox1->Size = System::Drawing::Size(979, 119);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
@@ -108,7 +108,7 @@ namespace SistemaHospitalView {
 			// btnBuscar
 			// 
 			this->btnBuscar->Location = System::Drawing::Point(689, 41);
-			this->btnBuscar->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->btnBuscar->Margin = System::Windows::Forms::Padding(5);
 			this->btnBuscar->Name = L"btnBuscar";
 			this->btnBuscar->Size = System::Drawing::Size(164, 53);
 			this->btnBuscar->TabIndex = 2;
@@ -119,7 +119,7 @@ namespace SistemaHospitalView {
 			// txtApellido
 			// 
 			this->txtApellido->Location = System::Drawing::Point(168, 51);
-			this->txtApellido->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->txtApellido->Margin = System::Windows::Forms::Padding(5);
 			this->txtApellido->Name = L"txtApellido";
 			this->txtApellido->Size = System::Drawing::Size(481, 34);
 			this->txtApellido->TabIndex = 1;
@@ -142,23 +142,12 @@ namespace SistemaHospitalView {
 					this->Column3, this->Column4
 			});
 			this->dgvLista->Location = System::Drawing::Point(14, 143);
-			this->dgvLista->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->dgvLista->Margin = System::Windows::Forms::Padding(5);
 			this->dgvLista->Name = L"dgvLista";
 			this->dgvLista->RowHeadersWidth = 51;
 			this->dgvLista->RowTemplate->Height = 24;
 			this->dgvLista->Size = System::Drawing::Size(979, 451);
 			this->dgvLista->TabIndex = 1;
-			// 
-			// btnSeleccionar
-			// 
-			this->btnSeleccionar->Location = System::Drawing::Point(391, 604);
-			this->btnSeleccionar->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
-			this->btnSeleccionar->Name = L"btnSeleccionar";
-			this->btnSeleccionar->Size = System::Drawing::Size(254, 66);
-			this->btnSeleccionar->TabIndex = 2;
-			this->btnSeleccionar->Text = L"Seleccionar";
-			this->btnSeleccionar->UseVisualStyleBackColor = true;
-			this->btnSeleccionar->Click += gcnew System::EventHandler(this, &frmBuscarPaciente::btnSeleccionar_Click);
 			// 
 			// Column1
 			// 
@@ -188,6 +177,17 @@ namespace SistemaHospitalView {
 			this->Column4->Name = L"Column4";
 			this->Column4->Width = 300;
 			// 
+			// btnSeleccionar
+			// 
+			this->btnSeleccionar->Location = System::Drawing::Point(391, 604);
+			this->btnSeleccionar->Margin = System::Windows::Forms::Padding(5);
+			this->btnSeleccionar->Name = L"btnSeleccionar";
+			this->btnSeleccionar->Size = System::Drawing::Size(254, 66);
+			this->btnSeleccionar->TabIndex = 2;
+			this->btnSeleccionar->Text = L"Seleccionar";
+			this->btnSeleccionar->UseVisualStyleBackColor = true;
+			this->btnSeleccionar->Click += gcnew System::EventHandler(this, &frmBuscarPaciente::btnSeleccionar_Click);
+			// 
 			// frmBuscarPaciente
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(14, 29);
@@ -198,9 +198,10 @@ namespace SistemaHospitalView {
 			this->Controls->Add(this->groupBox1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmBuscarPaciente";
 			this->Text = L"Buscar Paciente";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmBuscarPaciente::frmBuscarPaciente_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();

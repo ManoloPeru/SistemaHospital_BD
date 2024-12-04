@@ -136,6 +136,7 @@
     <ClCompile Include="frmNuevoMedico.cpp" />
     <ClCompile Include="frmPrincipal.cpp" />
     <ClCompile Include="frmRegistrarCita.cpp" />
+    <ClCompile Include="frmReporteCitas.cpp" />
     <ClCompile Include="frmReporteEquiposMedicos.cpp" />
     <ClCompile Include="frmVerCitas.cpp" />
     <ClCompile Include="main.cpp" />
@@ -200,6 +201,9 @@
     <ClInclude Include="frmRegistrarCita.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="frmReporteCitas.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="frmReporteEquiposMedicos.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -213,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarPaciente.resx">
       <DependentUpon>frmBuscarPaciente.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDetalleCita.resx">
+      <DependentUpon>frmDetalleCita.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditarEquipoMedico.resx">
       <DependentUpon>frmEditarEquipoMedico.h</DependentUpon>
@@ -256,8 +263,14 @@
     <EmbeddedResource Include="frmRegistrarCita.resx">
       <DependentUpon>frmRegistrarCita.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReporteCitas.resx">
+      <DependentUpon>frmReporteCitas.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmReporteEquiposMedicos.resx">
       <DependentUpon>frmReporteEquiposMedicos.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVerCitas.resx">
+      <DependentUpon>frmVerCitas.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

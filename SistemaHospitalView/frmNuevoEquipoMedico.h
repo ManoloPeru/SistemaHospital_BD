@@ -172,6 +172,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
 			this->Name = L"frmNuevoEquipoMedico";
 			this->Text = L"Nuevo Equipo Médico";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

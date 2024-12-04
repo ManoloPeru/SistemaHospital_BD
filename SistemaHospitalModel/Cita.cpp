@@ -107,4 +107,34 @@ namespace SistemaHospitalModel {
     void Cita::setNombreMedico(String^ nombreMedico) {
         this->nombreMedico = nombreMedico;
     }
+
+    /* Metodos de la clase ReporteCita */
+        // Constructor vacío
+    ReporteCita::ReporteCita() {
+        this->fecha = "";
+        this->cantidad = 0;
+    }
+
+    // Constructor con parámetros
+    ReporteCita::ReporteCita(String^ fecha, int cantidad) {
+        this->fecha = fecha;
+        this->cantidad = cantidad;
+    }
+
+    // Métodos GET
+    String^ ReporteCita::getFecha() {
+        return this->fecha;
+    }
+
+    int ReporteCita::getCantidad() {
+        return this->cantidad;
+    }
+    // Métodos SET
+    void ReporteCita::setFecha(String^ fecha) {
+        this->fecha = fecha;
+    }
+
+    void ReporteCita::setCantidad(int cantidad) {
+        this->cantidad = cantidad;
+    }
 }

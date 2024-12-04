@@ -129,3 +129,28 @@ void CitaController::insertCita(int idPaciente, int idMedico, String^ fecha, Str
     objSentencia->ExecuteNonQuery();
     cerrarConexion();
 }
+
+List<ReporteCita^>^ CitaController::contarCantidadCitas() {
+    // SQL para contar citas agrupadas por fecha
+    String^ sql = "SELECT fecha, COUNT(*) as cantidad FROM citaMedica GROUP BY fecha";
+
+    // Lista que almacenará los reportes
+    List<ReporteCita^>^ listaReporteCitas = gcnew List<ReporteCita^>();
+    abrirConexion();
+    SqlCommand^ objSentencia = gcnew SqlCommand(sql, this->getObjConexion());
+    SqlDataReader^ objData = objSentencia->ExecuteReader();
+
+    while (objData->Read()) {
+        // Obtener los valores de fecha y cantidad
+        String^ fecha = safe_cast<String^>(objData["fecha"]);
+        int cantidad = safe_cast<int>(objData["cantidad"]);
+
+        // Crear un objeto ReporteCita y agregarlo a la lista
+        ReporteCita^ reporte = gcnew ReporteCita(fecha, cantidad);
+        listaReporteCitas->Add(reporte);
+    }
+
+    objData->Close();
+    cerrarConexion();
+    return listaReporteCitas;
+}

@@ -5,6 +5,7 @@
 #include "frmReporteEquiposMedicos.h"
 #include "frmMantEquiposMedicos.h"
 #include "frmMantCitas.h"
+#include "frmReporteCitas.h"
 
 namespace SistemaHospitalView {
 
@@ -64,6 +65,7 @@ namespace SistemaHospitalView {
 	private: System::Windows::Forms::ToolStripMenuItem^ equiposMédicosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ equiposMédicosToolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^ registrarCitaToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ citasToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -86,12 +88,13 @@ namespace SistemaHospitalView {
 			this->equiposMédicosToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->transaccionesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->verCitaMédicaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->registrarCitaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->equiposMédicosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->tssLblFechaHora = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->tssLblUsuario = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->registrarCitaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->citasToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -167,9 +170,19 @@ namespace SistemaHospitalView {
 			this->verCitaMédicaToolStripMenuItem->Text = L"Ver Cita Médica";
 			this->verCitaMédicaToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::verCitaMédicaToolStripMenuItem_Click);
 			// 
+			// registrarCitaToolStripMenuItem
+			// 
+			this->registrarCitaToolStripMenuItem->Name = L"registrarCitaToolStripMenuItem";
+			this->registrarCitaToolStripMenuItem->Size = System::Drawing::Size(269, 36);
+			this->registrarCitaToolStripMenuItem->Text = L"Registrar Cita";
+			this->registrarCitaToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::registrarCitaToolStripMenuItem_Click);
+			// 
 			// reportesToolStripMenuItem
 			// 
-			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->equiposMédicosToolStripMenuItem });
+			this->reportesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->citasToolStripMenuItem,
+					this->equiposMédicosToolStripMenuItem
+			});
 			this->reportesToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"reportesToolStripMenuItem.Image")));
 			this->reportesToolStripMenuItem->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
 			this->reportesToolStripMenuItem->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
@@ -211,12 +224,12 @@ namespace SistemaHospitalView {
 			this->tssLblUsuario->Spring = true;
 			this->tssLblUsuario->Text = L"tssLblUsuario";
 			// 
-			// registrarCitaToolStripMenuItem
+			// citasToolStripMenuItem
 			// 
-			this->registrarCitaToolStripMenuItem->Name = L"registrarCitaToolStripMenuItem";
-			this->registrarCitaToolStripMenuItem->Size = System::Drawing::Size(269, 36);
-			this->registrarCitaToolStripMenuItem->Text = L"Registrar Cita";
-			this->registrarCitaToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::registrarCitaToolStripMenuItem_Click);
+			this->citasToolStripMenuItem->Name = L"citasToolStripMenuItem";
+			this->citasToolStripMenuItem->Size = System::Drawing::Size(282, 36);
+			this->citasToolStripMenuItem->Text = L"Citas";
+			this->citasToolStripMenuItem->Click += gcnew System::EventHandler(this, &frmPrincipal::citasToolStripMenuItem_Click);
 			// 
 			// frmPrincipal
 			// 
@@ -289,5 +302,10 @@ namespace SistemaHospitalView {
 		ventanaCitas->MdiParent = this;
 		ventanaCitas->Show();
 	}
-	};
+	private: System::Void citasToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		frmReporteCitas^ ventanaRptCitas = gcnew frmReporteCitas();
+		ventanaRptCitas->MdiParent = this;
+		ventanaRptCitas->Show();
+	}
+};
 }

@@ -196,6 +196,7 @@ namespace SistemaHospitalView {
 			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"frmMantCitas";
 			this->Text = L"Mantenimiento de Citas";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->Load += gcnew System::EventHandler(this, &frmMantCitas::frmMantCitas_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();

@@ -55,4 +55,25 @@ namespace SistemaHospitalModel {
         void setNombrePaciente(String^ nombrePaciente);
         void setNombreMedico(String^ nombreMedico);
     };
+
+    public ref class ReporteCita {
+    private:
+        String^ fecha;
+        int cantidad;
+
+    public:
+        // Constructor vacío
+        ReporteCita();
+
+        // Constructor con parámetros
+        ReporteCita(String^ fecha, int cantidad);
+
+        // Métodos GET
+        String^ getFecha();
+        int getCantidad();
+
+        // Métodos SET
+        void setFecha(String^ fecha);
+        void setCantidad(int cantidad);
+    };
 }
